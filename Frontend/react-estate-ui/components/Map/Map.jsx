@@ -5,7 +5,7 @@ import "./map.scss";
 import Pin from "../Pin/Pin";
 import "leaflet/dist/leaflet.css";
 
-export default function Map({item}){
+export default function Map({items}){
     const position = [51.505, -0.09]
 
     return (
@@ -15,8 +15,8 @@ export default function Map({item}){
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             {
-                item.map(data=>{
-                    <Pin item={data}/>
+                items.map(data=>{
+                    return <Pin item={data}/>
                 })
             }            
         </MapContainer>

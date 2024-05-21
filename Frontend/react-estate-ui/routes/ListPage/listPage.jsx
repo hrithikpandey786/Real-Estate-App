@@ -20,7 +20,7 @@ export default function Listpage(){
                 </div>
             </div>
             <div className="mapContainer">
-                <Map item={listData}/>
+                <Map items={listData}/>
             </div>
         </div>
     )

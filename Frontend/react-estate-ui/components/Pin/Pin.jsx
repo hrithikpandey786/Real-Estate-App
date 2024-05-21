@@ -12,7 +12,7 @@ export default function Pin({item}){
                     <div className="textContainer">
                         <Link to={`/${item.id}`}>{item.title}</Link>
                         <span className="bed">{item.bedroom} Bedroom</span>
-                        <b> {item.price}</b>
+                        <b>$ {item.price}</b>
                     </div>
                 </div>
             </Popup>
