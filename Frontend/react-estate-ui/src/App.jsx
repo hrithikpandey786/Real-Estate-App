@@ -13,6 +13,7 @@ import {
 import ListPage from "../routes/ListPage/listPage"
 import Layout from "../routes/Layout/layout";
 import "../routes/Layout/layout.scss"
+import SinglePage from "../routes/SinglePage/SinglePage";
 
 function App() {
   const router = createBrowserRouter([
@@ -27,6 +28,10 @@ function App() {
         {
           path: "/list",
           element: <ListPage/>
+        },
+        {
+          path: `/:id`,
+          element: <SinglePage/>
         }
       ]
     }

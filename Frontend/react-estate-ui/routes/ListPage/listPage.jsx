@@ -14,7 +14,7 @@ export default function Listpage(){
                         <Filter/>
                     {
                         listData.map((data)=>{
-                            return <Card item={data}/>;
+                            return <Card item={data} key={data.id}/>;
                         })
                     }
                 </div>

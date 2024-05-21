@@ -1,0 +1,91 @@
+.singlePage{
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+
+    .details{
+        flex: 3;
+
+        .wrapper{
+            padding-right: 50px;
+            
+            .info{
+                display: flex;
+                flex-direction: column;
+
+                .top{
+                    display: flex;
+                    justify-content: space-between;
+                    margin-top: 50px;
+
+                    .post{
+                        display: flex;
+                        flex-direction: column;
+                        gap: 20px;
+
+                        h1{
+                            font-weight: 400;
+                        }
+
+                        .address{
+                            display: flex;
+                            // justify-content: space-around;
+                            align-items: center;
+                            gap: 5px;
+                            width: 160px;
+                            color: #888;
+                            font-size: 14px;
+                            
+                            img{
+                                width: 16px;
+                                height: 16px;
+                                // justify-content: left;
+                            }
+                        }
+
+                        .price{
+                            padding: 5px;
+                            background-color: rgba(254, 205, 81, 0.438);
+                            border-radius: 5px;
+                            width: max-content;
+                            font-size: 20px;
+                            font-weight: 300;
+                        }
+                    }
+
+                    .user{
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 20px;
+                        background-color: rgba(254, 205, 81, 0.209);
+                        border-radius: 10px;
+                        padding: 0 50px;
+                        font-weight: 600px;
+
+                        img{
+                            height: 50px;
+                            width: 50px;
+                            object-fit: cover;
+                            border-radius: 50px;
+                        }
+                    }
+                }
+
+                .bottom{
+                    line-height: 20px;
+                    margin-top: 50px;
+                    color: #555;
+                }
+            }
+        }
+
+        
+    }
+
+    .features{
+        flex: 2;
+        background-color: #fcf5f3;
+    }
+}
