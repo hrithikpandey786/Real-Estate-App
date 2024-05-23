@@ -14,6 +14,8 @@ import ListPage from "../routes/ListPage/listPage"
 import Layout from "../routes/Layout/layout";
 import "../routes/Layout/layout.scss"
 import SinglePage from "../routes/SinglePage/SinglePage";
+import ProfilePage from "../routes/ProfilePage/profile";
+
 
 function App() {
   const router = createBrowserRouter([
@@ -32,6 +34,10 @@ function App() {
         {
           path: `/:id`,
           element: <SinglePage/>
+        },
+        {
+          path: "/profile",
+          element: <ProfilePage/>
         }
       ]
     }
