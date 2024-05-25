@@ -64,7 +64,7 @@ const login = async (req, res)=>{
 }
 
 const logout = (req, res)=>{
-    res.clearCookie("test2").status(200).json("Logout Successful1");
+    res.clearCookie("token").status(200).json("Logout Successfull!");
 }
 
 module.exports = {register, login, logout};
