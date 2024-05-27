@@ -1,10 +1,10 @@
 import React from "react";
-import "./register.scss";
+import "./login.scss";
 import {Link, useNavigate} from "react-router-dom";
 import apiRequest from "../../lib/apiRequest";
 
-export default function Register(){
-    const [error, setError] = React.useState(null);
+export default function Login(){
+    const [error, setError] = React.useState(false);
     const [isDisabled, setIsDisabled] = React.useState(false);
     
     const navigate = useNavigate();
@@ -12,22 +12,26 @@ export default function Register(){
     async function handleSubmit(event){
         event.preventDefault();
 
-        setIsDisabled(true);
-        setError(false);
-        
         const formData = new FormData(event.target);
-            
-        const username = formData.get("username");
-        const email = formData.get("email");
-        const password = formData.get("password");  
 
-        try{ 
-            
-            const user = await apiRequest.post("/auth/register", {
-                username, email, password
+        const username = formData.get("username");
+        const password = formData.get("password");
+
+        setIsDisabled(true);
+        setError(null);
+
+        try{
+            const user = await apiRequest.post("/auth/login", {
+                username, password
             })
-            navigate("/login");
+
+            // console.log(user.data);
+            const {password:userPassword, ...userInfo} = user.data;
+            // console.log(userInfo);
+            localStorage.setItem("user", JSON.stringify(userInfo));
+            navigate("/");
         } catch(err){
+            // console.log(err.response.data.message);
             setError(err.response.data.message);
         } finally{
             setIsDisabled(false);
@@ -35,16 +39,16 @@ export default function Register(){
     }
 
     return(
-        <div className="register">
+        <div className="login">
             <div className="formContainer">
                 <form onSubmit={handleSubmit}>
-                    <h1>Create an Account</h1>
+                    <h1>Welcome back</h1>
                     <input name="username" type="text" placeholder="Username"></input>
-                    <input name="email" type="email" placeholder="Email"></input>
                     <input name="password" type="text" placeholder="Password"></input>
-                    <button disabled={isDisabled} type="submit">Register</button>
+                    <button disabled={isDisabled} type="submit">Login</button>
                     {error && <span>{error}</span>}
-                    <Link className="link" to="/login">Do you have an account?</Link>
+                    {/* <a href="/login">Do you have an account?</a> */}
+                    <Link className="link" to="/register">Don't you have an account?</Link>
                 </form>
             </div>
             <div className="imgContainer">

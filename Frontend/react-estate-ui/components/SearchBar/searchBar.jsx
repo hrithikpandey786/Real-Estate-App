@@ -21,6 +21,7 @@ export default function SearchBar(){
                 {
                     types.map((type)=>{
                         return <button 
+                                    key={`${type}`}
                                     type={`${type}`} 
                                     onClick={()=>switchType(type)}
                                     className={(query.type===type?"active":"")}

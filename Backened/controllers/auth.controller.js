@@ -17,7 +17,7 @@ const register = async (req, res)=>{
 
         res.status(201).json(newData);
     } catch(err){
-        console.log(err);
+        // console.log(err);
         res.status(500).json({message: "Failed to create user"});
     }
     
@@ -35,13 +35,13 @@ const login = async (req, res)=>{
         });
 
         if(!user){
-            res.status(401).json({message: "Invalid Credentials!"});
+            return res.status(401).json({message: "Invalid Credentials!"});
         }
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
 
         if(!isPasswordValid){
-            res.status(401).json({message: "Invalid Credentials!"});
+            return res.status(401).json({message: "Invalid Credentials!"});
         }
         
         const age = 1000*60*60*24*7;
@@ -49,16 +49,14 @@ const login = async (req, res)=>{
         const token = jwt.sign({
             id: user.id
         }, process.env.JWT_SECRET_KEY, {expiresIn: age});
-        // res.setHeader("Set Cookie", "test="+"Set Value").json("Success");
 
-        res.cookie("token", token, {
+        return res.cookie("token", token, {
             httpOnly: true,
             maxAge: age,
             // secure: true
-        }).status(200).json({message: "Login Successful"});
+        }).status(200).json(user);
 
     } catch(err){
-        console.log(err);
         res.status(500).json({message: "Failed to login"});
     }
 }

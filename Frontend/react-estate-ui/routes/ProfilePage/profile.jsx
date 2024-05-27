@@ -4,6 +4,12 @@ import "./profile.scss";
 import Chat from "../../components/Chat/Chat";
 
 export default function Profile(){
+    function handleLogout(event){
+        event.preventDefault();
+
+        localStorage.removeItem("user");
+    }
+
     return (
         <div className="profilePage">
             <div className="details">
@@ -18,6 +24,7 @@ export default function Profile(){
                         </span>
                         <span>Username: <b>John Doe</b></span>
                         <span>E-mail: <b>john@email.com</b></span>
+                        <button onClick={handleLogout}>Logout</button>
                     </div>
                     <div className="title">
                         <h1>My List</h1>
