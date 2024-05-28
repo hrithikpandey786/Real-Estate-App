@@ -16,7 +16,7 @@ export default function Map({items}){
             />
             {
                 items.map(data=>{
-                    return <Pin item={data}/>
+                    return <Pin item={data} key={data.id}/>
                 })
             }            
         </MapContainer>

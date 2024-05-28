@@ -1,17 +1,35 @@
 import React from "react"
+import {useNavigate, Navigate} from "react-router-dom";
 import List from "../../components/List/List"
 import "./profile.scss";
 import Chat from "../../components/Chat/Chat";
 import { AuthContext } from "../../context/AuthContext";
+// import axios from "axios";
+import apiRequest from "../../lib/apiRequest";
+
 
 export default function Profile(){
-    
+    const navigate = useNavigate();
     const {currentUser, updateUser} = React.useContext(AuthContext);
     
-    function handleLogout(event){
-        // event.preventDefault();
+    // const {currentUser} = React.useContext(AuthContext);
+    // const navigate = useNavigate();
+    // React.useEffect(()=>{
+    //     if(!currentUser){
+    //         navigate("/login");
+    //     }
+    // }, [currentUser])
 
-        localStorage.removeItem("user");
+
+    async function handleLogout(event){
+        // event.preventDefault();
+        try{
+            await apiRequest.post("http://localhost:8800/api/auth/logout");    
+            updateUser(null);
+            navigate("/");
+        } catch(err){
+            console.log(err);
+        }
     }
 
     return (
