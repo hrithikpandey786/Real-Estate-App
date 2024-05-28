@@ -113,6 +113,11 @@ nav{
     
         .register{
             background-color: #fece51;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            // padding: 10px 20px;
+            height: 40px;
         }
         
         .menuIcon{

@@ -2,8 +2,12 @@ import React from "react";
 import "./login.scss";
 import {Link, useNavigate} from "react-router-dom";
 import apiRequest from "../../lib/apiRequest";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Login(){
+
+    const {updateUser} = React.useContext(AuthContext);
+
     const [error, setError] = React.useState(false);
     const [isDisabled, setIsDisabled] = React.useState(false);
     
@@ -27,8 +31,9 @@ export default function Login(){
 
             // console.log(user.data);
             const {password:userPassword, ...userInfo} = user.data;
-            // console.log(userInfo);
-            localStorage.setItem("user", JSON.stringify(userInfo));
+           
+            updateUser(userInfo);
+
             navigate("/");
         } catch(err){
             // console.log(err.response.data.message);

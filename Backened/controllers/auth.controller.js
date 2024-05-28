@@ -33,7 +33,7 @@ const login = async (req, res)=>{
         const user = await prisma.user.findUnique({
             where: {username}
         });
-
+        
         if(!user){
             return res.status(401).json({message: "Invalid Credentials!"});
         }
@@ -47,7 +47,8 @@ const login = async (req, res)=>{
         const age = 1000*60*60*24*7;
 
         const token = jwt.sign({
-            id: user.id
+            id: user.id,
+            isAdmin: false,
         }, process.env.JWT_SECRET_KEY, {expiresIn: age});
 
         return res.cookie("token", token, {

@@ -2,10 +2,14 @@ import React from "react"
 import List from "../../components/List/List"
 import "./profile.scss";
 import Chat from "../../components/Chat/Chat";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Profile(){
+    
+    const {currentUser, updateUser} = React.useContext(AuthContext);
+    
     function handleLogout(event){
-        event.preventDefault();
+        // event.preventDefault();
 
         localStorage.removeItem("user");
     }
@@ -20,10 +24,10 @@ export default function Profile(){
                     </div>
                     <div className="info">
                         <span>
-                            Avatar: <img src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"></img>
+                            Avatar: <img src={currentUser.avatar || "/favicon.png"}></img>
                         </span>
-                        <span>Username: <b>John Doe</b></span>
-                        <span>E-mail: <b>john@email.com</b></span>
+                        <span>Username: <b>{currentUser.username}</b></span>
+                        <span>E-mail: <b>{currentUser.email}</b></span>
                         <button onClick={handleLogout}>Logout</button>
                     </div>
                     <div className="title">

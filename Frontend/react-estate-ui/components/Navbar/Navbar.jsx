@@ -1,7 +1,9 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Navbar(){
+    const {currentUser} = React.useContext(AuthContext);
     const [open, setOpen] = React.useState(false);
     const [user, setUser] = React.useState(true);
 
@@ -20,11 +22,11 @@ export default function Navbar(){
             <div className="right">
                 {
                 
-                (user===true)?
+                (currentUser)?
                     <>
                         <div className="user">
-                            <img src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"></img>
-                            <span>John Doe</span>
+                            <img src={currentUser.avatar || "/favicon.png"}></img>
+                            <span>{currentUser.username}</span>
                             <Link to="/profile" className="profile">
                                 <div className="notification">3</div>
                                 <span>Profile</span>
@@ -33,8 +35,8 @@ export default function Navbar(){
                     </>
                 :
                     <>
-                        <a href="/">Sign in</a>
-                        <a href="/" className="register">Sign up</a>
+                        <a href="/login">Sign in</a>
+                        <a href="/register" className="register">Sign up</a>
                         <div className="menuIcon">
                             <img src="/menu.png" onClick={()=>setOpen(prev=>!prev)}></img>
                         </div>
@@ -43,8 +45,8 @@ export default function Navbar(){
                             <a href="/">About</a>
                             <a href="/">Contacts</a>
                             <a href="/">Agents</a>
-                            <a href="/">Sign in</a>
-                            <a href="/">Sign up</a>
+                            <a href="/login">Sign in</a>
+                            <a href="/signup">Sign up</a>
                         </div>
                     </>
                 }    
