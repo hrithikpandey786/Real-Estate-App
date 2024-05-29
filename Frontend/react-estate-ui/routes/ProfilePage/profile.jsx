@@ -1,5 +1,5 @@
 import React from "react"
-import {useNavigate, Navigate} from "react-router-dom";
+import {useNavigate, Navigate, Link} from "react-router-dom";
 import List from "../../components/List/List"
 import "./profile.scss";
 import Chat from "../../components/Chat/Chat";
@@ -38,7 +38,9 @@ export default function Profile(){
                 <div className="wrapper">
                     <div className="title">
                         <h1>User Information</h1>
-                        <button>Update Profile</button>
+                        <Link to="/profile/update">
+                            <button>Update Profile</button>
+                        </Link>
                     </div>
                     <div className="info">
                         <span>

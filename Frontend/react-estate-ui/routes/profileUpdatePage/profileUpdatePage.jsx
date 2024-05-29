@@ -3,31 +3,35 @@ import "./profileUpdatePage.scss";
 import { AuthContext } from "../../context/AuthContext";
 import apiRequest from "../../lib/apiRequest";
 import { useNavigate } from "react-router-dom";
-// import UploadWidget from "../../components/uploadWidget/UploadWidget";
+import UploadWidget from "../../components/Upload Widget/uploadWidget";
 
 function ProfileUpdatePage() {
   const { currentUser, updateUser } = useContext(AuthContext);
   const [error, setError] = useState("");
-  const [avatar, setAvatar] = useState([]);
+  const [avatar, setAvatar] = useState(null);
 
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const formData = new FormData(e.target);
+    // console.log(formData);
+    const username = formData.get("username");
+    const email = formData.get("email");
+    const password = formData.get("password");
 
-    const { username, email, password } = Object.fromEntries(formData);
-
-    try {
-      const res = await apiRequest.put(`/users/${currentUser.id}`, {
-        username,
-        email,
-        password,
-        avatar:avatar[0]
+    try{
+      console.log(currentUser.id);
+      const updatedUser = await apiRequest.put(`/users/${currentUser.id}`, {
+        username, email, password, avatar
       });
-      updateUser(res.data);
+
+      updateUser(updatedUser.data);
+
+      // res.status(200).json(updatedUser);
       navigate("/profile");
-    } catch (err) {
+    } catch(err){
       console.log(err);
       setError(err.response.data.message);
     }
@@ -64,18 +68,19 @@ function ProfileUpdatePage() {
           {error && <span>error</span>}
         </form>
       </div>
+      {console.log(avatar)}
       <div className="sideContainer">
-        <img src={avatar[0] || currentUser.avatar || "/noavatar.jpg"} alt="" className="avatar" />
-        {/* <UploadWidget
+        <img src={avatar || currentUser.avatar || "/bed.png"} alt="" className="avatar" />
+        <UploadWidget
           uwConfig={{
-            cloudName: "lamadev",
+            cloudName: "dbmigo1jw",
             uploadPreset: "estate",
             multiple: false,
             maxImageFileSize: 2000000,
             folder: "avatars",
           }}
           setState={setAvatar}
-        /> */}
+        />
       </div>
     </div>
   );

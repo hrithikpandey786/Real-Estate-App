@@ -17,7 +17,7 @@ const register = async (req, res)=>{
 
         res.status(201).json(newData);
     } catch(err){
-        // console.log(err);
+        console.log(err);
         res.status(500).json({message: "Failed to create user"});
     }
     
@@ -64,7 +64,7 @@ const login = async (req, res)=>{
 
 const logout = (req, res)=>{
     const token = req.cookies;
-    console.log(token);
+    // console.log(token);
     try{
         return res.clearCookie("token").status(200).json({message: "deleted"});
     } catch(err){

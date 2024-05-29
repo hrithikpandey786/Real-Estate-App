@@ -8,7 +8,7 @@ const verfiyToken = (req, res, next)=>{
     }
 
     jwt.verify(token, process.env.JWT_SECRET_KEY, async(err, payload)=>{
-        console.log(token)
+        // console.log(token)
         if(err){
             return res.status(403).json({message: "Token is not valid"});
         }
