@@ -8,7 +8,7 @@ import UploadWidget from "../../components/Upload Widget/uploadWidget";
 function ProfileUpdatePage() {
   const { currentUser, updateUser } = useContext(AuthContext);
   const [error, setError] = useState("");
-  const [avatar, setAvatar] = useState(null);
+  const [avatar, setAvatar] = useState([]);
 
   const navigate = useNavigate();
 
@@ -70,7 +70,7 @@ function ProfileUpdatePage() {
       </div>
       {console.log(avatar)}
       <div className="sideContainer">
-        <img src={avatar || currentUser.avatar || "/bed.png"} alt="" className="avatar" />
+        <img src={avatar[0] || currentUser.avatar || "/bed.png"} alt="" className="avatar" />
         <UploadWidget
           uwConfig={{
             cloudName: "dbmigo1jw",
