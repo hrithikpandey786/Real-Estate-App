@@ -3,7 +3,7 @@ import "./filter.scss";
 
 export default function Filter(){
     return (
-        <div className="filter">
+        <form>
             <h1>Search Results for London</h1>
             <div className="top">
                 <div className="item">
@@ -48,6 +48,6 @@ export default function Filter(){
                     <img src="/search.png"></img>
                 </button>
             </div>
-        </div>
+        </form>
     )
 }

@@ -3,10 +3,11 @@ import {Link} from "react-router-dom";
 import "./Card.scss";
 
 export default function Card({item}){
+    // console.log(item.images[0]);
     return (
         <div className="card">
             <Link to={`/${item.id}`} className="imageContainer">
-                <img src={`${item.img}`}></img>
+                <img src={item.img || item.images[0]}></img>
             </Link>
 
             <div className="textContainer">

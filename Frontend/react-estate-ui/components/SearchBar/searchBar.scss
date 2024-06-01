@@ -1,6 +1,7 @@
 @import "../../src/responsive.scss";
 
 .searchbar{
+    // background-color: yellow;
     .type{
 
         button{
@@ -38,8 +39,10 @@
         gap: 5px;
         border: 1px solid #999;
         display: flex;
-        justify-content: space-between;
-
+        flex-direction: row;
+        // justify-content: space-between;
+        // align-items: center;
+        // background: red;
         // @include md{
         //     border: 1px solid #999;
         // }
@@ -55,7 +58,7 @@
             // padding: 0px 10px;
             width: 200px;
             height: 100%;
-
+            // background-color: green;
             // &:first-child{
             //     border-top: none;
             // }
@@ -91,24 +94,33 @@
             }
         }
 
-        button{
-            background-color: #fece51;
+        a{
             flex: 1;
-            cursor: pointer;
-            border: none;
-            height: 100%;
-            
-            img{
-                width: 24px;
-                height: 24px;
-                
-                @include lg{
-                    scale: 105%;
-                }
-            }
+            background-color: #fece51;
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
-            @include sm{
-                padding: 10px;
+            button{
+                
+                background-color: #fece51;
+                // flex: 1;
+                cursor: pointer;
+                border: none;
+                height: 100%;
+                
+                img{
+                    width: 24px;
+                    height: 24px;
+                    
+                    @include lg{
+                        scale: 105%;
+                    }
+                }
+    
+                @include sm{
+                    padding: 10px;
+                }
             }
         }
     }
