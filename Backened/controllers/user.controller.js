@@ -91,8 +91,10 @@ const savedPost = async (req, res) => {
     try{
         const savedPost = await prisma.savedPost.findUnique({
             where:{
-                userId: tokenUserId,
-                postId: postId
+                userId_postId:{
+                    userId: tokenUserId,
+                    postId: postId
+                }
             }
         });
 
@@ -120,4 +122,32 @@ const savedPost = async (req, res) => {
     }
 }
 
-module.exports = {getUsers, getUser, updateUser, deleteUser, savedPost};
+const profilePosts = async (req, res) =>{
+    const tokenUserId = req.userId;
+    // console.log("hello");
+    try{
+        const userPosts = await prisma.post.findMany({
+            where: {
+                userId: tokenUserId
+            }
+        });
+
+        const saved = await prisma.savedPost.findMany({
+            where:{
+                userId: tokenUserId,
+            },
+            include:{
+                post: true
+            }
+        })
+        // console.log(saved);
+        const savedPosts = saved.map(save=>save.post);
+        // console.log(savedPost);
+        return res.status(200).json({userPosts, savedPosts});
+    } catch(err){
+        console.log(err);
+        res.status(500).json({message: "Error fetching Posts"});
+    }
+}
+
+module.exports = {getUsers, getUser, updateUser, deleteUser, savedPost, profilePosts};

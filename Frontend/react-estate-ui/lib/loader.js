@@ -20,3 +20,17 @@ export const listPageLoader = async ({request, params}) =>{
         return null;
     }
 }
+
+export const profilePageLoader= async (request, params)=>{
+    try{
+        const posts = await apiRequest.get("/users/profilePosts");
+
+        return defer({
+            postResponse: posts
+        })
+
+    } catch(err){
+        console.log(err);
+        return "Failed to get Posts";
+    }
+}

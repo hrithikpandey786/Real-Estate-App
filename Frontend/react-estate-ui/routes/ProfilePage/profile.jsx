@@ -1,5 +1,5 @@
-import React from "react"
-import {useNavigate, Navigate, Link} from "react-router-dom";
+import React, {Suspense} from "react"
+import {useNavigate, Navigate, Link, useLoaderData, Await} from "react-router-dom";
 import List from "../../components/List/List"
 import "./profile.scss";
 import Chat from "../../components/Chat/Chat";
@@ -11,7 +11,8 @@ import apiRequest from "../../lib/apiRequest";
 export default function Profile(){
     const navigate = useNavigate();
     const {currentUser, updateUser} = React.useContext(AuthContext);
-    
+    const posts = useLoaderData();
+    // console.log(posts.postResponse);
     // const {currentUser} = React.useContext(AuthContext);
     // const navigate = useNavigate();
     // React.useEffect(()=>{
@@ -56,11 +57,37 @@ export default function Profile(){
                             <button>Add New Post</button>
                         </Link>
                     </div>
-                        <List/>
+                    <Suspense fallback={<p>Loading...</p>}>
+                        <Await
+                            resolve={posts.postResponse}
+                            errorElement = {<p>Error Loading Posts</p>}
+                        >
+                        {({postResponse})=>(
+                            // posts.postResponse._data.data.userPosts.map(post=>(
+                            //     <Card key={post.id} item={post}></Card>
+                            // ))
+                            <List items={posts.postResponse.data.userPosts}/>
+                        )}
+                        </Await>
+                    </Suspense>
+                        {/* <List items={posts.data.userPosts}/> */}
                     <div className="title">
                         <h1>Saved List</h1>
                     </div>
-                    <List/>
+                    <Suspense fallback={<p>Loading...</p>}>
+                        <Await
+                            resolve={posts.postResponse}
+                            errorElement = {<p>Error Loading Posts</p>}
+                        >
+                        {({postResponse})=>(
+                            // posts.postResponse._data.data.userPosts.map(post=>(
+                            //     <Card key={post.id} item={post}></Card>
+                            // ))
+                            <List items={posts.postResponse.data.savedPosts}/>
+                        )}
+                        </Await>
+                    </Suspense>
+                    {/* <List items={posts.data.savedPosts}/> */}
                 </div>
             </div>
             <div className="chatContainer">

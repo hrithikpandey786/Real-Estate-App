@@ -52,8 +52,10 @@ const getPost = async (req, res) =>{
                 if(!error){
                     const saved = await prisma.savedPost.findUnique({
                         where:{
-                            userId: payload.id,
-                            postId: id
+                            userId_postId: {
+                                postId: id,
+                                userId: payload.id
+                            }
                         }
                     })
                     // console.log({...post, isSaved: saved?true:false});

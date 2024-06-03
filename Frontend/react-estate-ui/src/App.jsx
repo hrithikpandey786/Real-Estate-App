@@ -19,7 +19,7 @@ import Register from "../routes/Register/Register";
 import Login from "../routes/Login/Login";
 import ProfileUpdatePage from "../routes/profileUpdatePage/profileUpdatePage"
 import NewPostPage from "../routes/newPostPage/NewPostPage";
-import { listPageLoader, singlePageLoader } from "../lib/loader";
+import { listPageLoader, singlePageLoader, profilePageLoader } from "../lib/loader";
 
 
 function App() {
@@ -63,7 +63,8 @@ function App() {
       children:[
         {
           path: "/profile",
-          element: <ProfilePage/>
+          element: <ProfilePage/>,
+          loader: profilePageLoader
         },
         {
           path: "/profile/update",
