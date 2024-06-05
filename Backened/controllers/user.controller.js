@@ -141,12 +141,12 @@ const profilePosts = async (req, res) =>{
             }
         })
         // console.log(saved);
-        const savedPosts = saved.map(save=>save.post);
+        const savedPosts = saved.map(item=>item.post);
         // console.log(savedPost);
         return res.status(200).json({userPosts, savedPosts});
     } catch(err){
         console.log(err);
-        res.status(500).json({message: "Error fetching Posts"});
+        res.status(500).json({message: "Failed to get profile posts"});
     }
 }
 

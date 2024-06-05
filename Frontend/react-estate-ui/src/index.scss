@@ -1,59 +1,59 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
-a{
-    text-decoration: none;
-    color: inherit;
-}
-
-body{
-    font-family: "Lato", sans-serif;
-    overflow: hidden;
-}
-
-// * {
+// *{
 //     padding: 0;
 //     margin: 0;
 //     box-sizing: border-box;
 // }
 
-// a {
+// a{
 //     text-decoration: none;
 //     color: inherit;
 // }
 
-// body {
+// body{
 //     font-family: "Lato", sans-serif;
-//     overflow: auto; /* Change overflow to auto to allow scrolling */
+//     overflow: hidden;
 // }
 
-// .listPage {
-//     display: flex;
-//     height: 100vh;
-//     flex-wrap: nowrap; /* Ensure flex items stay on one line */
-//     overflow: hidden; /* Prevent the parent from overflowing */
-// }
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
 
-// .listContainer {
-//     flex: 3;
-//     height: 100%;
-//     overflow-y: auto; /* Ensure this container scrolls vertically */
-// }
+a {
+    text-decoration: none;
+    color: inherit;
+}
 
-// .wrapper {
-//     padding-right: 50px;
-//     height: 100%;
-//     display: flex;
-//     flex-direction: column;
-//     gap: 50px;
-//     margin-bottom: 50px;
-// }
+body {
+    font-family: "Lato", sans-serif;
+    overflow: auto; /* Change overflow to auto to allow scrolling */
+}
 
-// .mapContainer {
-//     flex: 2;
-//     height: 100%;
-//     background: #fcf5f3;
-// }
+.listPage {
+    display: flex;
+    height: 100vh;
+    flex-wrap: nowrap; /* Ensure flex items stay on one line */
+    overflow: hidden; /* Prevent the parent from overflowing */
+}
+
+.listContainer {
+    flex: 3;
+    height: 100%;
+    overflow-y: auto; /* Ensure this container scrolls vertically */
+}
+
+.wrapper {
+    padding-right: 0px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    margin-bottom: 50px;
+}
+
+.mapContainer {
+    flex: 2;
+    height: 100%;
+    background: #fcf5f3;
+}

@@ -3,6 +3,7 @@
 .listPage{
     display: flex;
     height: 100vh;
+    // padding-bottom: 50px;
     // flex-wrap: wrap;
     // justify-content: space-between;
 
@@ -12,6 +13,7 @@
         flex: 3;
         height: 100%;
         overflow-y: scroll;
+        
         .wrapper{
             padding-right: 50px;
             height: 100%;

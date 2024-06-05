@@ -11,7 +11,8 @@ import apiRequest from "../../lib/apiRequest";
 export default function Profile(){
     const navigate = useNavigate();
     const {currentUser, updateUser} = React.useContext(AuthContext);
-    const posts = useLoaderData();
+    const profileLoader = useLoaderData();
+    
     // console.log(posts.postResponse);
     // const {currentUser} = React.useContext(AuthContext);
     // const navigate = useNavigate();
@@ -59,14 +60,14 @@ export default function Profile(){
                     </div>
                     <Suspense fallback={<p>Loading...</p>}>
                         <Await
-                            resolve={posts.postResponse}
+                            resolve={profileLoader.postResponse}
                             errorElement = {<p>Error Loading Posts</p>}
                         >
                         {({postResponse})=>(
                             // posts.postResponse._data.data.userPosts.map(post=>(
                             //     <Card key={post.id} item={post}></Card>
                             // ))
-                            <List items={posts.postResponse.data.userPosts}/>
+                            <List items={profileLoader.postResponse.data.userPosts}/>
                         )}
                         </Await>
                     </Suspense>
@@ -76,14 +77,14 @@ export default function Profile(){
                     </div>
                     <Suspense fallback={<p>Loading...</p>}>
                         <Await
-                            resolve={posts.postResponse}
+                            resolve={profileLoader.postResponse}
                             errorElement = {<p>Error Loading Posts</p>}
                         >
                         {({postResponse})=>(
                             // posts.postResponse._data.data.userPosts.map(post=>(
                             //     <Card key={post.id} item={post}></Card>
                             // ))
-                            <List items={posts.postResponse.data.savedPosts}/>
+                            <List items={profileLoader.postResponse.data.savedPosts}/>
                         )}
                         </Await>
                     </Suspense>
@@ -92,7 +93,19 @@ export default function Profile(){
             </div>
             <div className="chatContainer">
                 <div className="wrapper">
-                    <Chat/>
+                    <Suspense fallback={<p>Loading...</p>}>
+                        <Await
+                            resolve={profileLoader.chatResponse}
+                            errorElement = {<p>Error Loading Posts</p>}
+                        >
+                        {({chatResponse})=>(
+                            // posts.postResponse._data.data.userPosts.map(post=>(
+                            //     <Card key={post.id} item={post}></Card>
+                            // ))
+                            <Chat items={profileLoader.chatResponse.data}/>
+                        )}
+                        </Await>
+                    </Suspense>
                 </div>
             </div>
         </div>
