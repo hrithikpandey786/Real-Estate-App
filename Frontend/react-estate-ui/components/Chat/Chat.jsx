@@ -2,12 +2,14 @@ import React, { useContext } from "react";
 import "./chat.scss";
 import apiRequest from "../../lib/apiRequest";
 import { AuthContext } from "../../context/AuthContext";
+import { SocketContext } from "../../context/SocketContext";
 import {format} from "timeago.js";
 
 export default function Chat({items}){
     const [chat, setChat] = React.useState(null);
     const {currentUser, updateUser} = useContext(AuthContext);
-    
+    const {socket} = useContext(SocketContext);
+
     async function handleOpenChat(id, receiver){
         // console.log(item);
         try{
@@ -15,7 +17,7 @@ export default function Chat({items}){
             const chats = await apiRequest.get(`/chats/${id}`);
             
             setChat([chats.data, receiver]);
-            console.log(chat)
+            
         } catch(err){   
             console.log(err);
         }
