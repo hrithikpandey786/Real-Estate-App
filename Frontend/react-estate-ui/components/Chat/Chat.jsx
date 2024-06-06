@@ -8,14 +8,14 @@ export default function Chat({items}){
     const [chat, setChat] = React.useState(null);
     const {currentUser, updateUser} = useContext(AuthContext);
     
-    async function handleOpenChat(item){
+    async function handleOpenChat(id, receiver){
         // console.log(item);
         try{
             // console.log(item);
-            const chats = await apiRequest.get(`/chats/${item.id}`);
+            const chats = await apiRequest.get(`/chats/${id}`);
             
-            setChat([chats.data, item.receiver]);
-            // console.log(chat[0])
+            setChat([chats.data, receiver]);
+            console.log(chat)
         } catch(err){   
             console.log(err);
         }
@@ -35,7 +35,7 @@ export default function Chat({items}){
             // console.log(message.data);
             // console.log(chat)
             setChat(prev=>{
-                prev, prev[0].messages = [...prev[0].messages, message.data]
+                    return [{...prev[0], messages: [...prev[0].messages, message.data]}, prev[1]];
             })
             
             event.target.reset();
@@ -50,7 +50,7 @@ export default function Chat({items}){
                 <h1>Messages</h1>
                 {
                     items.map(item=>{
-                        return <div key={item.id} className="message" onClick={()=>handleOpenChat(item)} style={{backgroundColor: item.seenBy.includes(currentUser.id)?"white":"#fecd514e"}}>
+                        return <div key={item.id} className="message" onClick={()=>handleOpenChat(item.id, item.receiver)} style={{backgroundColor: item.seenBy.includes(currentUser.id)||item.Id===chat.id?"white":"#fecd514e"}}>
                             <img src={item.receiver.avatar || "/noavatar.png"}></img>
                             <span>{item.receiver.username}</span>
                             <p>{item.lastMessage}</p>
@@ -64,7 +64,7 @@ export default function Chat({items}){
                         <img src={chat[1].avatar || "/noavatar.png"}/>
                         {chat[1].username}
                     </div>
-                        <span className="close" onClick={()=>setChat(null)}>X</span>
+                        <span className="close" onClick={(e)=>{e.preventDefault(); setChat(()=>null)}}>X</span>
                 </div>
                 <div className="center">
                     {
