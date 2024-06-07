@@ -14,12 +14,12 @@ const addUser = (userId, socketId)=>{
     }
 }
 
-const removeUser = (userId) =>{
-    onlineUser = onlineUser.filter(user=>user.userId!==userId);
+const removeUser = (socketId) =>{
+    return onlineUser = onlineUser.filter(user=>user.socketId!==socketId);
 }
 
-const getUser = (socketId) =>{
-    const user = onlineUser.find(user=>user.socketId===socketId);
+const getUser = (receiverId) =>{
+    return onlineUser.find(user=>user.userId===receiverId);
 }
 
 io.on("connection", (socket)=>{
@@ -27,13 +27,18 @@ io.on("connection", (socket)=>{
         addUser(userId, socket.id);    
     })
 
-    socket.on("disconnect", (userId)=>{
-        removeUser(userId);
+    socket.on("sendMessage", ({receiverId, data})=>{
+        const receiver = getUser(receiverId);
+        // console.log(receiver);
+        if(receiver){
+            io.to(receiver.socketId).emit("getMessage", data);
+        } else {
+            console.log(`receiver with id ${receiverId} not found`, onlineUser);
+        }
     })
 
-    socket.on("sendMessage", (receiverId, data)=>{
-        const receiver = getUser(receiverId);
-        io.to(receiver.socketId).emit("getMessage", data);
+    socket.on("disconnect", (socketId)=>{
+        removeUser(socketId);
     })
 })
 

@@ -22,7 +22,7 @@ function ProfileUpdatePage() {
     const password = formData.get("password");
 
     try{
-      console.log(currentUser.id);
+      // console.log(currentUser.id);
       const updatedUser = await apiRequest.put(`/users/${currentUser.id}`, {
         username, email, password, avatar
       });
@@ -68,9 +68,9 @@ function ProfileUpdatePage() {
           {error && <span>error</span>}
         </form>
       </div>
-      {console.log(avatar)}
+      {/* {console.log(avatar)} */}
       <div className="sideContainer">
-        <img src={avatar[0] || currentUser.avatar || "/bed.png"} alt="" className="avatar" />
+        <img src={avatar[0] || currentUser.avatar || "/noavatar.png"} alt="" className="avatar" />
         <UploadWidget
           uwConfig={{
             cloudName: "dbmigo1jw",

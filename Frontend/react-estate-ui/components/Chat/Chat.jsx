@@ -9,11 +9,15 @@ export default function Chat({items}){
     const [chat, setChat] = React.useState(null);
     const {currentUser, updateUser} = useContext(AuthContext);
     const {socket} = useContext(SocketContext);
+    const messageEndRef = React.useRef();
+    // console.log(items);
+    
+    React.useEffect(()=>{
+        messageEndRef.current?.scrollIntoView({behavior: "smooth"});
+    }, [chat])
 
     async function handleOpenChat(id, receiver){
-        // console.log(item);
         try{
-            // console.log(item);
             const chats = await apiRequest.get(`/chats/${id}`);
             
             setChat([chats.data, receiver]);
@@ -23,6 +27,8 @@ export default function Chat({items}){
         }
     }
 
+    
+    
     async function handleSubmit(event){
         event.preventDefault();
 
@@ -33,9 +39,10 @@ export default function Chat({items}){
             return;
         
         try{
+            // console.log(chat);
             const message = await apiRequest.put(`/message/${chat[0].id}`,{text});
-            // console.log(message.data);
-            // console.log(chat)
+            socket.emit("sendMessage", {receiverId: chat[1].id, data: message.data});
+            
             setChat(prev=>{
                     return [{...prev[0], messages: [...prev[0].messages, message.data]}, prev[1]];
             })
@@ -46,13 +53,40 @@ export default function Chat({items}){
         }
     }
 
+    React.useEffect(()=>{
+        const read = async ()=>{
+            try{
+                await apiRequest.put(`/chats/read/${chat[0].id}`);
+            } catch(err){   
+                console.log(err);
+            }
+        }
+
+        if(chat && socket){
+            socket.on("getMessage", (data)=>{
+                if(chat[0].id===data.chatId){
+                    setChat(prev=>{
+                        return [{...prev[0], messages: [...prev[0].messages, data]}, prev[1]];
+                    });
+                    read();
+                }
+            })
+        }
+        
+        return ()=>{
+            socket.off("getMessage");
+        }
+    }, [socket, chat])
+
+
     return (
         <div className="chat">
             <div className="messages">
                 <h1>Messages</h1>
+                {/* {console.log(chat.id)} */}
                 {
                     items.map(item=>{
-                        return <div key={item.id} className="message" onClick={()=>handleOpenChat(item.id, item.receiver)} style={{backgroundColor: item.seenBy.includes(currentUser.id)||item.Id===chat.id?"white":"#fecd514e"}}>
+                        return <div key={item.id} className="message" onClick={()=>handleOpenChat(item.id, item.receiver)} style={{backgroundColor: item.seenBy.includes(currentUser.id)||(chat && item.id===chat[0].id)?"white":"#fecd514e"}}>
                             <img src={item.receiver.avatar || "/noavatar.png"}></img>
                             <span>{item.receiver.username}</span>
                             <p>{item.lastMessage}</p>
@@ -80,6 +114,8 @@ export default function Chat({items}){
                             </div>
                         })
                     }
+                    <div ref={messageEndRef}>
+                    </div>
                 </div>
                 <form onSubmit={handleSubmit}>
                     <div  className="bottom">

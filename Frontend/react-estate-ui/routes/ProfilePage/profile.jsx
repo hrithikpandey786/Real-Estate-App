@@ -12,7 +12,7 @@ export default function Profile(){
     const navigate = useNavigate();
     const {currentUser, updateUser} = React.useContext(AuthContext);
     const profileLoader = useLoaderData();
-    
+    // console.log(profileLoader);
     // console.log(posts.postResponse);
     // const {currentUser} = React.useContext(AuthContext);
     // const navigate = useNavigate();
