@@ -150,4 +150,26 @@ const profilePosts = async (req, res) =>{
     }
 }
 
-module.exports = {getUsers, getUser, updateUser, deleteUser, savedPost, profilePosts};
+const getNotification = async (req, res) =>{
+    const tokenUserId = req.userId;
+    
+    try{
+        const chats = await prisma.chat.findMany({
+            where: {
+                userIDs: {hasSome:[tokenUserId]} ,
+                NOT: {
+                    seenBy:{
+                        hasSome: [tokenUserId]
+                    } 
+                }
+            },
+        })
+        // console.log("fetched chats", chats.length);
+        return res.status(200).json(chats.length);
+    } catch(err){
+        console.log(err);
+        res.status(500).json({message: "Failed to get notification number"});
+    }
+}
+
+module.exports = {getUsers, getUser, updateUser, deleteUser, savedPost, profilePosts, getNotification};

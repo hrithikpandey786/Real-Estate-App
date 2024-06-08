@@ -9,5 +9,6 @@ router.put("/:id", verifyToken, controllers.updateUser);
 router.delete("/:id", verifyToken, controllers.deleteUser);
 router.post("/save", verifyToken, controllers.savedPost);
 router.get("/profilePosts", verifyToken, controllers.profilePosts);
+router.get("/notification", verifyToken, controllers.getNotification);
 
 module.exports = router;
