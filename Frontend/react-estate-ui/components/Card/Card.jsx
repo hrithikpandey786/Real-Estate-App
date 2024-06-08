@@ -1,9 +1,49 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import "./Card.scss";
+import apiRequest from "../../lib/apiRequest";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Card({item}){
-    // console.log(item.images[0]);
+    // console.log(item.id);
+    const {currentUser} = React.useContext(AuthContext);
+    const [saved, setSaved] = React.useState(false);
+    const navigate = useNavigate();
+
+    React.useEffect(()=>{
+        if(!currentUser){
+            return;
+        }
+
+        async function isSaved(){
+            try{
+                const save = await apiRequest.get(`/posts/${item.id}`);
+    
+                if(save.data.isSaved){
+                    setSaved(true);
+                }
+            } catch(err){
+    
+            }
+        }
+        isSaved();
+    }, [])
+
+    async function handleSavePost(){
+        if(!currentUser){
+            navigate("/login");
+        }
+
+        try{
+            await apiRequest.post("/users/save",{
+                postId: item.id
+            })
+            setSaved(prev=>!prev);
+        } catch(err){
+            console.log(err);
+        }
+    }
+    
     return (
         <div className="card">
             <Link to={`/${item.id}`} className="imageContainer">
@@ -34,8 +74,8 @@ export default function Card({item}){
                         </div>
                     </div>
                     <div className="icons">
-                        <div className="icon">
-                            <img src="/save.png"></img>
+                        <div className="icon" style={{backgroundColor:saved?"#fece51":"white"}}>
+                            <img src="/save.png" onClick={handleSavePost}></img>
                         </div>
                         <div className="icon">
                             <img src="/chat.png"></img>

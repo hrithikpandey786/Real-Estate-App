@@ -27,7 +27,8 @@ a {
 
 body {
     font-family: "Lato", sans-serif;
-    overflow: auto; /* Change overflow to auto to allow scrolling */
+    overflow: hidden;
+    overflow-y: auto; /* Change overflow to auto to allow scrolling */
 }
 
 .listPage {

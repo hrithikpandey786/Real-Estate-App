@@ -10,7 +10,6 @@ export const useNotificationStore = create((set)=>({
                 throw new Error("error fetching notification number")
             }
             set({number: res.data});
-            console.log("hello");
         } catch(err){
             console.log(err);
         }

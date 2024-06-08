@@ -23,6 +23,7 @@ export default function Navbar(){
                 </a>
                 <a href="/">Home</a>
                 <a href="/">About</a>
+                <a href="/list">Properties</a>
                 <a href="/">Contacts</a>
                 <a href="/">Agents</a>
             </div>
@@ -30,7 +31,7 @@ export default function Navbar(){
                 {
                 
                 (currentUser)?
-                    
+                    <>
                         <div className="user">
                             <img src={currentUser.avatar || "/favicon.png"}></img>
                             <span>{currentUser.username}</span>
@@ -39,7 +40,7 @@ export default function Navbar(){
                                 <span>Profile</span>
                             </Link>
                         </div>
-                    
+                    </>
                 :
                     <>
                         <a href="/login">Sign in</a>
@@ -50,6 +51,7 @@ export default function Navbar(){
                         <div className={open?"menu active":"menu"}>
                             <a href="/">Home</a>
                             <a href="/">About</a>
+                            <a href="/list">Properties</a>
                             <a href="/">Contacts</a>
                             <a href="/">Agents</a>
                             <a href="/login">Sign in</a>
