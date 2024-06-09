@@ -26,16 +26,9 @@ export default function Listpage(){
                         )}
                         </Await>
                     </Suspense>
-                    
-                    {/* {
-                        items.data.map((data)=>{
-                            return <Card item={data} key={data.id}/>;
-                        })
-                    } */}
                 </div>
             </div>
             <div className="mapContainer">
-                {/* <Map items={items.data}/> */}
                 <Suspense fallback={<p>Loading...</p>}>
                         <Await
                             resolve={items.postResponse}

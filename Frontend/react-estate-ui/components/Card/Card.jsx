@@ -5,7 +5,6 @@ import apiRequest from "../../lib/apiRequest";
 import { AuthContext } from "../../context/AuthContext";
 
 export default function Card({item}){
-    // console.log(item.id);
     const {currentUser} = React.useContext(AuthContext);
     const [saved, setSaved] = React.useState(false);
     const navigate = useNavigate();

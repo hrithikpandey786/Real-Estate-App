@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 
 const getPosts = async (req, res) =>{
     const query = req.query;
-    // console.log(query);
+    
     try{
         const posts = await prisma.post.findMany({
             where: {
@@ -42,8 +42,6 @@ const getPost = async (req, res) =>{
             }
         })
 
-        // let userId;
-
         if(!token){{
             return res.status(200).json({...post, isSaved: false}); 
         }
@@ -58,7 +56,7 @@ const getPost = async (req, res) =>{
                             }
                         }
                     })
-                    // console.log({...post, isSaved: saved?true:false});
+                    
                     return res.status(200).json({...post, isSaved: saved?true:false});
                 } else {
                     console.log(error);
@@ -74,13 +72,8 @@ const getPost = async (req, res) =>{
 }
 
 const addPost = async (req, res) =>{
-    // const id = req.params.id;
     const tokenId = req.userId;
     const body = req.body;
-
-    // if(id!==tokenId){
-    //     return res.status(403).json({message: "Not Authorized"});
-    // }
     
     try{
         const newPost = await prisma.post.create({

@@ -20,10 +20,6 @@ const register = async (req, res)=>{
         console.log(err);
         res.status(500).json({message: "Failed to create user"});
     }
-    
-    
-
-    // res.send(hashedPassword);
 }
 
 const login = async (req, res)=>{
@@ -64,7 +60,7 @@ const login = async (req, res)=>{
 
 const logout = (req, res)=>{
     const token = req.cookies;
-    // console.log(token);
+    
     try{
         return res.clearCookie("token").status(200).json({message: "deleted"});
     } catch(err){

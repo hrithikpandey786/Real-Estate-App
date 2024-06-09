@@ -29,14 +29,12 @@ export default function Login(){
                 username, password
             })
 
-            // console.log(user.data);
             const {password:userPassword, ...userInfo} = user.data;
            
             updateUser(userInfo);
 
             navigate("/");
         } catch(err){
-            // console.log(err.response.data.message);
             setError(err.response.data.message);
         } finally{
             setIsDisabled(false);
@@ -52,7 +50,6 @@ export default function Login(){
                     <input name="password" type="text" placeholder="Password"></input>
                     <button disabled={isDisabled} type="submit">Login</button>
                     {error && <span>{error}</span>}
-                    {/* <a href="/login">Do you have an account?</a> */}
                     <Link className="link" to="/register">Don't you have an account?</Link>
                 </form>
             </div>

@@ -16,20 +16,17 @@ function ProfileUpdatePage() {
     e.preventDefault();
 
     const formData = new FormData(e.target);
-    // console.log(formData);
     const username = formData.get("username");
     const email = formData.get("email");
     const password = formData.get("password");
 
     try{
-      // console.log(currentUser.id);
       const updatedUser = await apiRequest.put(`/users/${currentUser.id}`, {
         username, email, password, avatar
       });
 
       updateUser(updatedUser.data);
 
-      // res.status(200).json(updatedUser);
       navigate("/profile");
     } catch(err){
       console.log(err);
@@ -68,7 +65,7 @@ function ProfileUpdatePage() {
           {error && <span>error</span>}
         </form>
       </div>
-      {/* {console.log(avatar)} */}
+      
       <div className="sideContainer">
         <img src={avatar[0] || currentUser.avatar || "/noavatar.png"} alt="" className="avatar" />
         <UploadWidget

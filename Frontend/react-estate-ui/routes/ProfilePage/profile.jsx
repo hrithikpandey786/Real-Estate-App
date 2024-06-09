@@ -12,15 +12,6 @@ export default function Profile(){
     const navigate = useNavigate();
     const {currentUser, updateUser} = React.useContext(AuthContext);
     const profileLoader = useLoaderData();
-    // console.log(profileLoader);
-    // console.log(posts.postResponse);
-    // const {currentUser} = React.useContext(AuthContext);
-    // const navigate = useNavigate();
-    // React.useEffect(()=>{
-    //     if(!currentUser){
-    //         navigate("/login");
-    //     }
-    // }, [currentUser])
 
 
     async function handleLogout(event){
@@ -64,14 +55,10 @@ export default function Profile(){
                             errorElement = {<p>Error Loading Posts</p>}
                         >
                         {({postResponse})=>(
-                            // posts.postResponse._data.data.userPosts.map(post=>(
-                            //     <Card key={post.id} item={post}></Card>
-                            // ))
                             <List items={profileLoader.postResponse.data.userPosts}/>
                         )}
                         </Await>
                     </Suspense>
-                        {/* <List items={posts.data.userPosts}/> */}
                     <div className="title">
                         <h1>Saved List</h1>
                     </div>
@@ -81,14 +68,10 @@ export default function Profile(){
                             errorElement = {<p>Error Loading Posts</p>}
                         >
                         {({postResponse})=>(
-                            // posts.postResponse._data.data.userPosts.map(post=>(
-                            //     <Card key={post.id} item={post}></Card>
-                            // ))
                             <List items={profileLoader.postResponse.data.savedPosts}/>
                         )}
                         </Await>
                     </Suspense>
-                    {/* <List items={posts.data.savedPosts}/> */}
                 </div>
             </div>
             <div className="chatContainer">
@@ -99,9 +82,6 @@ export default function Profile(){
                             errorElement = {<p>Error Loading Posts</p>}
                         >
                         {({chatResponse})=>(
-                            // posts.postResponse._data.data.userPosts.map(post=>(
-                            //     <Card key={post.id} item={post}></Card>
-                            // ))
                             <Chat items={profileLoader.chatResponse.data}/>
                         )}
                         </Await>

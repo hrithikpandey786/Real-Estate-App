@@ -38,8 +38,6 @@ export default function SearchBar(){
                                 </button>    
                     })
                 }
-                {/* <button type="buy">Buy</button>
-                <button type="rent">Rent</button> */}
             </div>
             <form>
                 <input 

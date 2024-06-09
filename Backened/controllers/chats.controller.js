@@ -65,7 +65,7 @@ const getChat = async (req, res) =>{
                 }
             }
         })
-        // console.log(chat);
+        
         res.status(200).json(chat);
     } catch(err){
         console.log(err);
@@ -82,7 +82,7 @@ const addChat = async (req, res) =>{
                 userIDs: [tokenUserId, req.body.receiverId]
             }
         })
-        // console.log("hello");
+        
         res.status(200).json(newChat);
     } catch(err){
         console.log(err);

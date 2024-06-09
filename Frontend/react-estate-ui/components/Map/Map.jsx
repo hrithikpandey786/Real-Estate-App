@@ -7,7 +7,7 @@ import "leaflet/dist/leaflet.css";
 
 export default function Map({items}){
     const position = [51.505, -0.09]
-    // console.log(items);
+    
     return (
         <MapContainer center={(items.length==1)?[parseFloat(items[0].latitude), parseFloat(items[0].longitude)]:[51.505, -0.09]} zoom={8} scrollWheelZoom={false} className="map">
             <TileLayer

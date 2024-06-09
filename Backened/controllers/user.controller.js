@@ -30,7 +30,7 @@ const updateUser = async (req, res)=>{
     const id = req.params.id;
     const tokenId = req.userId;
     const {password, avatar, ...newData} = req.body;
-    // console.log(newData);
+    
     if(id!==tokenId){
         return res.status(403).json({message: "Not Authorized"});
     }
@@ -124,7 +124,7 @@ const savedPost = async (req, res) => {
 
 const profilePosts = async (req, res) =>{
     const tokenUserId = req.userId;
-    // console.log("hello");
+    
     try{
         const userPosts = await prisma.post.findMany({
             where: {
@@ -140,9 +140,8 @@ const profilePosts = async (req, res) =>{
                 post: true
             }
         })
-        // console.log(saved);
+        
         const savedPosts = saved.map(item=>item.post);
-        // console.log(savedPost);
         return res.status(200).json({userPosts, savedPosts});
     } catch(err){
         console.log(err);
@@ -164,7 +163,7 @@ const getNotification = async (req, res) =>{
                 }
             },
         })
-        // console.log("fetched chats", chats.length);
+        
         return res.status(200).json(chats.length);
     } catch(err){
         console.log(err);

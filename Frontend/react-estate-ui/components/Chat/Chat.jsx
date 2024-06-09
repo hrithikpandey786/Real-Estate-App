@@ -12,11 +12,8 @@ export default function Chat({items}){
     const {currentUser, updateUser} = useContext(AuthContext);
     const {socket} = useContext(SocketContext);
     const messageEndRef = React.useRef();
-    // console.log(items);
     
-    // const fetch = useNotificationStore((state)=>state.fetch);
     const decrease = useNotificationStore((state)=>state.decrease);
-    // const reset = useNotificationStore((state=>state.reset));
 
     React.useEffect(()=>{
         messageEndRef.current?.scrollIntoView({behavior: "smooth"});
@@ -25,7 +22,6 @@ export default function Chat({items}){
     async function handleOpenChat(id, receiver){
         try{
             const chats = await apiRequest.get(`/chats/${id}`);
-            // {decrease}
             setChat([chats.data, receiver]);
             const seen = chats.data.seenBy.includes(currentUser.id)
             if(!seen){
@@ -48,7 +44,6 @@ export default function Chat({items}){
             return;
         
         try{
-            // console.log(chat);
             const message = await apiRequest.put(`/message/${chat[0].id}`,{text});
             socket.emit("sendMessage", {receiverId: chat[1].id, data: message.data});
             
@@ -92,7 +87,6 @@ export default function Chat({items}){
         <div className="chat">
             <div className="messages">
                 <h1>Messages</h1>
-                {/* {console.log(chat.id)} */}
                 {
                     items.map(item=>{
                         return <div key={item.id} className="message" onClick={()=>handleOpenChat(item.id, item.receiver)} style={{backgroundColor: item.seenBy.includes(currentUser.id)||(chat && item.id===chat[0].id)?"white":"#fecd514e"}}>

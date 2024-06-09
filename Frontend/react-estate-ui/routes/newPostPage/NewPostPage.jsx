@@ -5,13 +5,11 @@ import "react-quill/dist/quill.snow.css";
 import apiRequest from "../../lib/apiRequest";
 import UploadWidget from "../../components/Upload Widget/uploadWidget";
 import { useNavigate } from "react-router-dom";
-// import { AuthContext } from "../../context/AuthContext";
 
 function NewPostPage() {
   const [value, setValue] = useState("");
   const [images, setImages] = useState([]);
   const [error, setError] = useState("");
-//   const {currentUser} = React.useContext(AuthContext);
 
   const navigate = useNavigate()
 
