@@ -8,7 +8,7 @@ const userRoute = require("./routes/user.route");
 const postsRoute = require("./routes/post.route");
 const chatsRoute = require("./routes/chat.route.js");
 const messageRoute = require("./routes/message.route.js");
-
+const PORT = process.env.PORT || 8800
 
 app.use(cors({origin: process.env.CLIENT_URL, credentials: true}));
 app.use(express.json());
@@ -22,6 +22,6 @@ app.use("/api/message", messageRoute);
 
 
 
-app.listen(8800, ()=>{
-    console.log("Server is listening on port 8800...");
+app.listen(PORT, ()=>{
+    console.log(`Server is listening on port ${PORT}...`);
 })
