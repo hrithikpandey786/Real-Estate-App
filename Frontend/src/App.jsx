@@ -1,94 +1,53 @@
-import react from "react"
-import "./index.scss"
-// import "./layout.scss"
-import Navbar from "../components/Navbar/Navbar"
-import "../components/Navbar/navbar.scss"
-import HomePage from "../routes/HomePage/homePage"
+import HomePage from "./routes/homePage/homePage";
 import {
   createBrowserRouter,
   RouterProvider,
-  Route,
-  Link,
 } from "react-router-dom";
-import ListPage from "../routes/ListPage/listPage"
-import { Layout, RequireAuth } from "../routes/Layout/layout";
-import "../routes/Layout/layout.scss"
-import SinglePage from "../routes/SinglePage/SinglePage";
-import ProfilePage from "../routes/ProfilePage/profile";
-import Register from "../routes/Register/Register";
-import Login from "../routes/Login/Login";
-import ProfileUpdatePage from "../routes/profileUpdatePage/profileUpdatePage"
-import NewPostPage from "../routes/newPostPage/NewPostPage";
-import { listPageLoader, singlePageLoader, profilePageLoader } from "../lib/loader";
-
+import ListPage from "./routes/listPage/listPage";
+import Layout from "./routes/layout/layout";
+import SinglePage from "./routes/singlePage/singlePage";
+import ProfilePage from "./routes/profilePage/profilePage";
+import Login from "./routes/login/login";
+import Register from "./routes/register/register";
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Layout/>,
+      element: <Layout />,
       children:[
         {
-          path: "/",
-          element: <HomePage/>
+          path:"/",
+          element:<HomePage/>
         },
         {
-          path: "/list",
-          element: <ListPage/>,
-          loader: listPageLoader
+          path:"/list",
+          element:<ListPage/>
         },
         {
-          path: `/:id`,
-          element: <SinglePage/>,
-          loader: singlePageLoader
-        },
-        // {
-        //   path: "/profile",
-        //   element: <ProfilePage/>
-        // },
-        {
-          path: "/register",
-          element: <Register/>
+          path:"/:id",
+          element:<SinglePage/>
         },
         {
-          path: "/login",
-          element: <Login/>
-        }
-      ]
-    },
-
-    {
-      path: "/",
-      element: <RequireAuth/>,
-      children:[
-        {
-          path: "/profile",
-          element: <ProfilePage/>,
-          loader: profilePageLoader
+          path:"/profile",
+          element:<ProfilePage/>
         },
         {
-          path: "/profile/update",
-          element: <ProfileUpdatePage/>
+          path:"/login",
+          element:<Login/>
         },
         {
-          path: "/add",
-          element: <NewPostPage/>
+          path:"/register",
+          element:<Register/>
         }
       ]
     }
   ]);
-  
+
   return (
-    // <div className="layout">
-    //   <div className="navbar">
-    //     <Navbar/>
-    //   </div>
-    //   <div className="content">
-    //     <HomePage/>
-    //   </div>
-    // </div>
+
     <RouterProvider router={router}/>
-  )
+  );
 }
 
-export default App
+export default App;
