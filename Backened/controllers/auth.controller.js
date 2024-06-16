@@ -41,7 +41,7 @@ const login = async (req, res)=>{
         }
         
         const age = 1000*60*60*24*7;
-
+        
         const token = jwt.sign({
             id: user.id,
             isAdmin: false,
