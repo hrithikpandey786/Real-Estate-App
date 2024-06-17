@@ -9,7 +9,7 @@ function ProfileUpdatePage() {
   const [error, setError] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
   const {currentUser, updateUser} = React.useContext(AuthContext);
-  const [avatar, setAvatar] = React.useState(currentUser.avatar);
+  const [avatar, setAvatar] = React.useState([]);
   const navigate = useNavigate();
 
   async function handleSubmit(e){
@@ -23,7 +23,7 @@ function ProfileUpdatePage() {
     
     try{
       const res = await apiRequest.put(`/users/${currentUser.id}`, {
-        username, password, email, avatar
+        username, password, email, avatar:avatar[0]
       })
 
       updateUser(res.data);
@@ -68,7 +68,7 @@ function ProfileUpdatePage() {
         </form>
       </div>
       <div className="sideContainer">
-        <img src={avatar || "/noavatar.png"} alt="" className="avatar" />
+        <img src={avatar[0] || currentUser.avatar || "/noavatar.png"} alt="" className="avatar" />
         <UploadWidget
           uwConfig={{
             cloudName: "dbmigo1jw",

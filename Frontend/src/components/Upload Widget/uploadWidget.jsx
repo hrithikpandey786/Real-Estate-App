@@ -34,7 +34,7 @@ function UploadWidget({ uwConfig, setState }) {
             // console.log("Done! Here is the image info: ", result.info);
             // console.log(result.info);
             
-            setState(result.info.secure_url)
+            setState(prev=>[...prev, result.info.secure_url]);
           }
         }
       );

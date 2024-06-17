@@ -68,7 +68,7 @@ model PostDetail{
   size Int?
   school Int?
   bus Int?
-  restaurent String?
+  restaurant String?
   post Post @relation(fields: [postId], references: [id])
 }
 
