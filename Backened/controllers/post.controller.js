@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 
 const getPosts = async (req, res) =>{
     const query = req.query;
-    
+    console.log(query);
     try{
         const posts = await prisma.post.findMany({
             where: {

@@ -67,7 +67,7 @@ function NewPostPage() {
             </div>
             <div className="item">
               <label htmlFor="price">Price</label>
-              <input id="price" name="price" type="number" />
+              <input id="price" name="price" type="number" min={0} max={10000000}/>
             </div>
             <div className="item">
               <label htmlFor="address">Address</label>
