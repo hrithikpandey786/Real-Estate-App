@@ -27,3 +27,16 @@ export const listPageLoader = async ({request, params}) =>{
         console.log(err);
     }
 } 
+
+
+export const profilePageLoader = async ({request, params}) =>{
+    try{
+        const postPromise = apiRequest.get("/users/profilePosts");
+
+        return defer({
+            postResponse: postPromise
+        })
+    } catch(err){
+        console.log(err);
+    }
+} 
