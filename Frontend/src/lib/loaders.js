@@ -32,9 +32,11 @@ export const listPageLoader = async ({request, params}) =>{
 export const profilePageLoader = async ({request, params}) =>{
     try{
         const postPromise = apiRequest.get("/users/profilePosts");
+        const chatPromise = apiRequest.get("/chats");
 
         return defer({
-            postResponse: postPromise
+            postResponse: postPromise,
+            chatResponse: chatPromise
         })
     } catch(err){
         console.log(err);
