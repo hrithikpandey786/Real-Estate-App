@@ -33,7 +33,7 @@ export default function Navbar(){
                 (currentUser)?
                     <>
                         <div className="user">
-                            <img src={currentUser.avatar || "/favicon.png"}></img>
+                            <img src={currentUser.avatar || "/noavatar.png"}></img>
                             <span>{currentUser.username}</span>
                             <Link to="/profile" className="profile">
                                 {number>0 && <div className="notification">{number}</div>}

@@ -41,7 +41,7 @@ function NewPostPage() {
                 school: parseInt(inputs.school),
                 size: parseInt(inputs.size),
                 bus: parseInt(inputs.bus),
-                restaurent: inputs.restaurent,
+                restaurant: inputs.restaurant,
                 desc: value
             }
         })

@@ -37,7 +37,7 @@ export default function Profile(){
                     </div>
                     <div className="info">
                         <span>
-                            Avatar: <img src={currentUser.avatar || "/favicon.png"}></img>
+                            Avatar: <img src={currentUser.avatar || "/noavatar.png"}></img>
                         </span>
                         <span>Username: <b>{currentUser.username}</b></span>
                         <span>E-mail: <b>{currentUser.email}</b></span>
