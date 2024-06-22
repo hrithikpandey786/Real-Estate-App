@@ -49,7 +49,7 @@ const updateUser = async (req, res)=>{
             }, data: {
                 ...newData,
                 ...password && {password: hashedPassword},
-                ...avatar && {avatar: avatar}
+                ...avatar && {avatar: avatar[0]}
             }
         });
 
