@@ -3,7 +3,9 @@
 .homepage{
     display: flex;
     // justify-content: center;
-    height: 100vh;
+    // height: 100vh;
+    height: calc(100vh - 60px); /* Assuming the navbar height is 60px */
+    padding-bottom: 60px; /* Same as the height of the navbar */
 
     .textContainer{
         flex: 3;
