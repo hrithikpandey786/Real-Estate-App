@@ -125,7 +125,7 @@ export default function SinglePage(){
                                 <img src="/restaurant.png"></img>
                                 <div className="featureText">
                                     <span>Restaurant</span>
-                                    <p>{(post.postDetail.restaurent>1000)?post.postDetail.restaurent/1000+" km": post.postDetail.restaurent+" m"} away</p>
+                                    <p>{(post.postDetail.restaurant>1000)?post.postDetail.restaurant/1000+" km": post.postDetail.restaurant+" m"} away</p>
                                 </div>
                             </div>
                     </div>

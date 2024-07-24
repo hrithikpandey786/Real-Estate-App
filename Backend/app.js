@@ -10,6 +10,9 @@ const chatsRoute = require("./routes/chat.route.js");
 const messageRoute = require("./routes/message.route.js");
 const PORT = process.env.PORT || 8800
 
+require('dotenv').config();
+
+
 app.use(cors({origin: process.env.CLIENT_URL, credentials: true}));
 app.use(express.json());
 app.use(cookieParser());

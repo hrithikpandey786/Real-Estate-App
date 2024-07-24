@@ -81,7 +81,7 @@
     .chatContainer{
         flex: 2;
         background-color: #fcf5f3;
-        padding-bottom: 40px;
+        // padding-bottom: 0px;
         overflow-y: scroll;
 
         @include md{
